@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		45572BFC2E9DD865008460D6 /* MindRepo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindRepo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45572C172E9DDD2A008460D6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +33,7 @@
 		45572BF32E9DD865008460D6 = {
 			isa = PBXGroup;
 			children = (
+				45572C172E9DDD2A008460D6 /* README.md */,
 				45572BFE2E9DD865008460D6 /* MindRepo */,
 				45572BFD2E9DD865008460D6 /* Products */,
 			);
