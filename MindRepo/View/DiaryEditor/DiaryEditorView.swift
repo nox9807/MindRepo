@@ -59,6 +59,15 @@ struct DiaryEditorView: View {
         try? modelContext.save()
     }
     
+    /// 일기 삭제
+    private func delete() {
+        if let diary {
+            modelContext.delete(diary)
+            try? modelContext.save()
+        }
+        dismiss()
+    }
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
@@ -107,6 +116,23 @@ struct DiaryEditorView: View {
                     customTextEditor($content)
                 }
                 .modifier(SectionCard())
+                
+                // MARK: - 삭제 버튼
+                
+                if isEditing {
+                    Button(role: .destructive) {
+                        delete()
+                    } label: {
+                        Image(systemName: "trash")
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding(10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.red.opacity(0.1))
+                    )
+                }
             }
             .padding()
             .navigationTitle(isEditing ? "일기 수정" : "일기 작성")
