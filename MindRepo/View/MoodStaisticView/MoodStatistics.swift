@@ -55,8 +55,8 @@ struct MoodStatView: View {
             LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), spacing: 16) {
                 ForEach(moodCounts, id: \.0) { mood, count in
                     VStack(spacing: 6) {
-                        Text(mood.emoji)
-                            .font(.system(size: 28))
+                        Text(mood.emojis)
+                            .font(.title3)
                         Text("\(count)")
                             .font(.headline)
                             .foregroundColor(count > 0 ? .primary : .gray)
@@ -74,13 +74,13 @@ struct MoodStatView: View {
                             innerRadius: .ratio(0.5),
                             angularInset: 1.2
                         )
-                        .foregroundStyle(mood.color.opacity(0.85))
+                        .foregroundStyle(mood.color.opacity(0.6))
                         .cornerRadius(4)
                         .annotation(position: .overlay) {
                             VStack{
-                                Text(mood.emoji)
+                                Text(mood.emojis)
                                     .font(.title3)
-                                
+                                    
                                 Text("\(Int(ratio * 100))%")
                                     .font(.caption)
                                     .foregroundColor(.white)
