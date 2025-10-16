@@ -44,21 +44,17 @@ struct SearchView: View {
                         moodFilterButton(mood)
                     }
                 }
-                .padding(.horizontal)
+                .padding([.horizontal, .bottom])
                 
                 List {
-                    ForEach(results) { diary in
-                        
-                        // MARK: - DiaryContentView
-                        
-                        VStack(alignment: .leading) {
-                            Text(diary.content)
+                    VStack(alignment: .leading) {
+                        ForEach(results) { diary in
+                            DiaryView(diary: diary)
                         }
                     }
                     .listRowSeparator(.hidden)
-                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 10, trailing: 0))
                     .listRowBackground(Color.clear)
-                    .padding(.horizontal)
                 }
                 .listStyle(.plain)
             }
@@ -70,7 +66,6 @@ struct SearchView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
-
                 }
             }
         }
@@ -88,7 +83,7 @@ struct SearchView: View {
                 .font(.subheadline)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
-                .background(isOn ? Color.blue.opacity(0.2) : Color.gray.opacity(0.2))
+                .background(isOn ? mood.color.opacity(0.3) : Color.gray.opacity(0.2))
                 .clipShape(.capsule)
         }
         .buttonStyle(.plain)
