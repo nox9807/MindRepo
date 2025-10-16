@@ -1,5 +1,5 @@
 //
-//  Untitled.swift
+//  SearchView.swift
 //  MindRepo
 //
 //  Created by MindRepo Team on 10/16/25
