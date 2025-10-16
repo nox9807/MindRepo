@@ -142,21 +142,6 @@ fileprivate struct DayCell: View {
     }
 }
 
-// MARK: - extension Mood color(임시)
-
-extension Mood {
-    var color: Color {
-        switch self {
-        case .angry: .red
-        case .sad: .teal
-        case .laugh: .yellow
-        case .neutral: .gray
-        case .bad: .purple
-        case .good: .orange
-        }
-    }
-}
-
 // MARK: - Preview
 
 #Preview(traits: .diarySample) {
