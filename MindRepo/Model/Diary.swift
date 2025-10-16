@@ -83,15 +83,29 @@ extension Diary {
 extension Diary {
     var color: Color {
         switch mood {
-            case .angry: return .red
-            case .sad: return .black
-            case .laugh: return .cyan
-            case .neutral: return .orange
-            case .bad: return .gray
-            case .good: return . green
+            case .angry: .red
+            case .sad: .black
+            case .laugh: .cyan
+            case .neutral: .orange
+            case .bad: .gray
+            case .good: . green
         }
     }
 }
+
+extension Mood {
+    var color: Color {
+        switch self {
+        case .angry: .red
+        case .sad: .black
+        case .laugh: .cyan
+        case .neutral: .orange
+        case .bad: .gray
+        case .good: . green
+        }
+    }
+}
+
 extension Mood {
     var emojis: Image {
         switch self {
