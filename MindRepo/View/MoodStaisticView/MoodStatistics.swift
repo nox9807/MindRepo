@@ -5,12 +5,14 @@
 //  Created by MindRepo Team on 10/14/25
 //
 
-
+import SwiftData
 import SwiftUI
 import Charts
 
 struct MoodStatView: View {
-    let diaries: [Diary]
+    
+    @Query(sort: [SortDescriptor(\Diary.date, order: .reverse)])
+    private var diaries: [Diary]
     
     // 감정별 카운트 계산
     private var moodCounts: [(Mood, Int)] {
@@ -32,15 +34,22 @@ struct MoodStatView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(alignment: .leading,spacing: 20) {
+            
             
             Text("기본통계")
                 .font(.title)
-                .frame(alignment: .topTrailing)
+                .padding()
             
-            Text("감정별 (총 \(total)건)")
-                .font(.headline)
-                .foregroundColor(.secondary)
+            HStack {
+                
+                Spacer()
+                Text("감정별 (총 \(total)건)")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                Spacer()
+            }
+            .padding()
             
             // 감정별 카운트 리스트
             LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), spacing: 16) {
@@ -63,9 +72,21 @@ struct MoodStatView: View {
                         SectorMark(
                             angle: .value("비율", ratio),
                             innerRadius: .ratio(0.5),
-                            angularInset: 1.5
+                            angularInset: 1.2
                         )
-                        .foregroundStyle(mood.color)
+                        .foregroundStyle(mood.color.opacity(0.85))
+                        .cornerRadius(4)
+                        .annotation(position: .overlay) {
+                            VStack{
+                                Text(mood.emoji)
+                                    .font(.title3)
+                                
+                                Text("\(Int(ratio * 100))%")
+                                    .font(.caption)
+                                    .foregroundColor(.white)
+                                    .bold()
+                            }
+                        }
                     }
                 }
                 .frame(height: 200)
@@ -83,6 +104,7 @@ struct MoodStatView: View {
     }
 }
 
-#Preview {
-    MoodStatView(diaries: Diary.dummy)
+#Preview(traits: .diarySample) {
+    MoodStatView()
+    
 }
