@@ -7,7 +7,9 @@
 
 
 import SwiftUI
-
+enum AppColor {
+    
+}
 struct DiaryView: View {
     let diary: Diary
     var body: some View {
@@ -18,7 +20,7 @@ struct DiaryView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text(diary.mood.emoji)
+                    Text(diary.mood.emojis)
                         .font(.title)
                     
                     VStack(alignment: .leading) {

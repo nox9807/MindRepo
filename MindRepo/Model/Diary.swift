@@ -92,3 +92,21 @@ extension Diary {
         }
     }
 }
+extension Mood {
+    var emojis: Image {
+        switch self {
+            case .angry:
+                Image("angry")
+            case .sad:
+                Image("sad")
+            case .laugh:
+                Image("laugh")
+            case .neutral:
+                Image("neutral")
+            case .bad:
+                Image("bad")
+            case .good:
+                Image("good")
+        }
+    }
+}

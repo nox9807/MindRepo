@@ -22,7 +22,7 @@ struct MainTabView: View {
     var selectedColor: Color = .indigo
     
     var body: some View {
-        // MARK : tabBar 아래 고정
+        // MARK: tabBar 아래 고정
         tabBar
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .safeAreaInset(edge: .bottom) {
@@ -35,7 +35,7 @@ struct MainTabView: View {
             }
             .ignoresSafeArea(edges: .bottom)
     }
-    // tabBar 화면 전환
+    // MARK: -tabBar 화면 전환
     @ViewBuilder
     var tabBar: some View {
         switch selected {
@@ -48,9 +48,8 @@ struct MainTabView: View {
             case .stats:
                 MoodStatView(diaries: Diary.dummy)
         }
-        
     }
-    // tabButton 기능
+    // MARK: -tabButton 기능
     @ViewBuilder
     var tabButton: some View {
         HStack {
