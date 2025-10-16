@@ -48,87 +48,80 @@ struct DiaryListView: View {
     
     //@Query private var items: [Diary]
     @Query(sort: \Diary.date, order: .reverse) private var items: [Diary]
-    
+    @Environment(\.dismiss) private var dismiss
     @State var year = Calendar.current.component(.year, from: .now)
     @State var month = Calendar.current.component(.month, from: .now)
-    @State var showPicker: Bool = false
     @State var selection = Date()
+    
+    @State var showSearch: Bool = false
+    @State var showPicker: Bool = false
+    @State var keyword: String = ""
+    
+    var filterdItmes: [Diary] {
+        if keyword.isEmpty {return items}
+        else { return items.filter {
+            return $0.content.lowercased().contains(keyword.lowercased())
+        }}
+    }
+    
     var body: some View {
-        VStack {
-            // Title
-            HStack() {
-                Text("일기목록")
-                    .font(.title3)
-                    .bold()
-                
-                Spacer()
-                
-                Button {
-                    showPicker = true
-                } label: {
-                    Text("\(year.formatted(.number.grouping(.never)))년 \(month)월")
-                }
-                .sheet(isPresented: $showPicker) {
-                    CustomYearMonthPickerView(year: $year, month: $month) {
-                        showPicker = false
+        NavigationStack {
+            VStack {
+                // MARK: Title + 검색버튼
+                HStack() {
+                    Text("일기목록")
+                        .font(.title3)
+                        .bold()
+                    
+                    Spacer()
+                    Button {
+                        showSearch = true
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(.gray)
+                            .bold()
                     }
                 }
-                .presentationDetents([.height(300)])
-            }
-            .padding(.horizontal)
-            // ScrollView로 목록 구현
-            ScrollView(showsIndicators: false){
-                ForEach(items) { diary in
+                .padding(.horizontal)
+                .padding(.bottom)
+                
+                // MARK: 캘린더 구현
+                HStack {
+                    
+                    Spacer()
+                    
                     Button {
-                        // 작성 중 내용으로 가면됨
+                        showPicker = true
                     } label: {
-                        // 배경
-                        ZStack(alignment: .topLeading) {
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(minHeight: 100)
-                                .foregroundStyle(.gray.opacity(0.1))
-                            
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Text(diary.mood.emoji)
-                                        .font(.title)
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text(diary.date, format: Date.FormatStyle(date: .numeric, time: .omitted))
-                                            .bold()
-                                        Text("시간")
-                                            .font(.footnote)
-                                    }
-                                }
-                                .frame(maxWidth: .infinity , alignment: .topLeading)
-                                .padding(.top, 10)
-                                .padding(.bottom, 5)
-                                
-                                
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("안녕하세요 지금은 테스트 중입니다.반갑습니다.")
-                                        .foregroundStyle(.cyan)
-                                        .lineLimit(1)
-                                    Text("안녕하세요 지금은 테스트 중입니다.반갑습니다.")
-                                        .foregroundStyle(.cyan)
-                                        .lineLimit(1)
-                                    Text("안녕하세요 지금은 테스트 중입니다.반갑습니다.")
-                                        .foregroundStyle(.cyan)
-                                        .lineLimit(1)
-                                    
-                                }
-                                .padding(.vertical, 10)
-                                .frame(maxWidth: 270, alignment: .leading)
-                            }
-                            .padding(.horizontal, 10) // 좌우 여백도 통일
+                        HStack {
+                            Text("\(year.formatted(.number.grouping(.never)))년 \(month)월")
+                                .padding(.horizontal, -5)
+                            Image(systemName: "chevron.down")
                         }
-                        .padding(.horizontal)
-                        .foregroundStyle(.black)
-                    } // label 끝
+                        .foregroundStyle(.gray)
+                        .bold()
+                    }
+                    .sheet(isPresented: $showPicker) {
+                        CustomYearMonthPickerView(year: $year, month: $month) {
+                            showPicker = false
+                        }
+                    }
+                    .presentationDetents([.height(300)])
                 }
+                .padding(.horizontal)
+                
+                // MARK: ScrollView로 목록 구현
+                ScrollView(showsIndicators: false){
+                    ForEach(filterdItmes) { item in
+                        DiaryView(diary: item)
+                            .border(Color.black)
+                    }
+                }
+                .border(Color.black)
             }
+            .background(.cyan.opacity(0.01))
         }
-        .background(.cyan.opacity(0.01))
+        
     }
 }
 
