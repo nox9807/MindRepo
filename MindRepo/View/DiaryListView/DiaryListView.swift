@@ -114,10 +114,8 @@ struct DiaryListView: View {
                 ScrollView(showsIndicators: false){
                     ForEach(filterdItmes) { item in
                         DiaryView(diary: item)
-                            .border(Color.black)
                     }
                 }
-                .border(Color.black)
             }
             .background(.cyan.opacity(0.01))
         }

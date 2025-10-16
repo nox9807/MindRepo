@@ -18,7 +18,7 @@ struct DiaryView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text(diary.mood.emoji)
+                    Text(diary.mood.emojis)
                         .font(.title)
                     
                     VStack(alignment: .leading) {
