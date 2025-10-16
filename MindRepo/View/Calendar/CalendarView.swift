@@ -16,24 +16,48 @@ struct CalendarView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             MonthlyCalendarView(vm: vm)
             
             if let diary = vm.selectedDiary {
-                TempDiaryView(diary: diary)
+                DiaryView(diary: diary)
             } else {
+                emptyView
+            }
+            
+            Spacer()
+        }
+    }
+    
+    private var emptyView: some View {
+        // TODO: - DiaryView와 공통 스타일링 고려
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .frame(minHeight: 100)
+                .foregroundStyle(.gray.opacity(0.1))
+            
+            VStack {
+                Image(systemName: "tray")
+                    .font(.largeTitle)
+                    .padding(.bottom, 5)
                 Text("기록 없음")
+                    .foregroundStyle(.gray)
+                
+                Button {
+                    // TODO: - 날짜 바탕 추가
+                } label: {
+                    Text("기록 추가")
+                        .bold()
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 8)
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundStyle(.blue.opacity(0.2))
+                        }
+                }
             }
         }
-        
-    }
-}
-
-fileprivate struct TempDiaryView: View {
-    let diary: Diary
-    
-    var body: some View {
-        Text(diary.content)
+        .padding()
     }
 }
 
