@@ -7,9 +7,7 @@
 
 
 import SwiftUI
-enum AppColor {
-    
-}
+
 struct DiaryView: View {
     let diary: Diary
     var body: some View {
