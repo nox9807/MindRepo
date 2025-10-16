@@ -53,6 +53,7 @@ struct DiaryListView: View {
     @State var month = Calendar.current.component(.month, from: .now)
     @State var showPicker: Bool = false
     @State var selection = Date()
+    
     var body: some View {
         VStack {
             // Title
@@ -76,6 +77,7 @@ struct DiaryListView: View {
                 .presentationDetents([.height(300)])
             }
             .padding(.horizontal)
+            .padding(.bottom)
             // ScrollView로 목록 구현
             ScrollView(showsIndicators: false){
                 ForEach(items) { diary in
