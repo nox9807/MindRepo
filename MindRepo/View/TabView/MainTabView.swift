@@ -16,7 +16,7 @@ enum Tab {
 }
 
 struct MainTabView: View {
-    
+    @Environment(\.modelContext) var modelContext
     @State var selected: Tab = .list
     var basicColor: Color = .black
     var selectedColor: Color = .indigo
@@ -42,11 +42,11 @@ struct MainTabView: View {
             case .list:
                 DiaryListView()
             case .calendar:
-                Text("calendarView")
+                CalendarView(modelContext: modelContext)
             case .editor:
                 DiaryEditorView()
             case .stats:
-                MoodStat()
+                MoodStatView(diaries: Diary.dummy)
         }
         
     }
@@ -134,7 +134,7 @@ struct MainTabView: View {
     }
 }
 
-#Preview {
+#Preview(traits: .diarySample) {
     MainTabView(selected: .list)
 }
 
