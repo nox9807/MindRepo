@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 // MARK: - Diary
 @Model
@@ -76,5 +77,18 @@ extension Diary {
         
         dummy.forEach { context.insert($0) }
         try? context.save()
+    }
+}
+
+extension Diary {
+    var color: Color {
+        switch mood {
+            case .angry: return .red
+            case .sad: return .black
+            case .laugh: return .cyan
+            case .neutral: return .orange
+            case .bad: return .gray
+            case .good: return . green
+        }
     }
 }

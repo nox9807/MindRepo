@@ -33,7 +33,7 @@ struct MoodStatView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-        
+            
             Text("기본통계")
                 .font(.title)
                 .frame(alignment: .topTrailing)
@@ -65,7 +65,7 @@ struct MoodStatView: View {
                             innerRadius: .ratio(0.5),
                             angularInset: 1.5
                         )
-                        .foregroundStyle(color(for: mood))
+                        .foregroundStyle(mood.color)
                     }
                 }
                 .frame(height: 200)
@@ -80,18 +80,6 @@ struct MoodStatView: View {
         .background(Color(.systemGray6))
         .cornerRadius(20)
         .padding()
-    }
-    
-    // 감정별 색상 매핑
-    private func color(for mood: Mood) -> Color {
-        switch mood {
-            case .angry: return .red
-            case .sad: return .blue
-            case .laugh: return .green
-            case .neutral: return .gray
-            case .bad: return .black
-            case .good: return .yellow
-        }
     }
 }
 
