@@ -8,10 +8,9 @@ import SwiftUI
 import SwiftData
 
 
-
+// TODO: - HeaderView 적용
+// TODO: - toolbar로 추가, 검색 버튼 위치
 struct DiaryListView: View {
-    
-    //@Query private var items: [Diary]
     @Query(sort: \Diary.date, order: .reverse) private var items: [Diary]
     @Environment(\.dismiss) private var dismiss
     @State var year = Calendar.current.component(.year, from: .now)
@@ -27,7 +26,8 @@ struct DiaryListView: View {
     var filterdItmes: [Diary] {
         if keyword.isEmpty {
             return items
-        } else { return items.filter {
+        } else {
+            return items.filter {
             return $0.content.lowercased().contains(keyword.lowercased())
         }
         }
@@ -79,7 +79,20 @@ struct DiaryListView: View {
                 // MARK: ScrollView로 목록 구현
                 ScrollView(showsIndicators: false){
                     ForEach(filterdItmes) { item in
+                        // TODO: - 수정, 삭제 기능
                         DiaryView(diary: item)
+                            .contextMenu {
+                                Button {
+                                    /// 삭제 기능
+                                } label: {
+                                    /// 삭제 아이콘
+                                    Text("삭제")
+                                }
+
+                            }
+                            .onTapGesture {
+                                /// 수정 기능
+                            }
                     }
                 }
             }

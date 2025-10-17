@@ -9,8 +9,8 @@ import SwiftData
 import SwiftUI
 import Charts
 
+// MARK: - HeaderView 추가
 struct MoodStatisticsView: View {
-    
     @Query(sort: [SortDescriptor(\Diary.date, order: .reverse)])
     private var diaries: [Diary]
     

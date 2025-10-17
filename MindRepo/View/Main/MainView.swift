@@ -8,9 +8,12 @@
 
 import SwiftUI
 
+// TODO: - CommonLayoutView로 변경 고려
 struct MainView: View {
     @Environment(\.modelContext) var modelContext
     @State var selected: TabItem = .list
+    
+    // TODO: - 컬러 Asset 추가
     var basicColor: Color = .black
     var selectedColor: Color = .indigo
     
@@ -21,7 +24,7 @@ struct MainView: View {
     }
     
     var body: some View {
-            // MARK: tabBar 아래 고정
+            // MARK: - tabBar 아래 고정
             tabBar
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .safeAreaInset(edge: .bottom) {
@@ -43,7 +46,7 @@ struct MainView: View {
                 }
     }
         
-    // MARK: -tabBar 화면 전환
+    // MARK: - tabBar 화면 전환
     @ViewBuilder
     var tabBar: some View {
         switch selected {
@@ -56,8 +59,7 @@ struct MainView: View {
         }
     }
     
-    // MARK: -tabButton 기능
-    @ViewBuilder
+    // MARK: - tabButton 기능
     var tabButton: some View {
         HStack {
             Spacer()
