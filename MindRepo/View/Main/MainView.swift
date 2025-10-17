@@ -8,16 +8,9 @@
 
 import SwiftUI
 
-enum Tab {
-    case list
-    case calendar
-    case editor
-    case stats
-}
-
-struct MainTabView: View {
+struct MainView: View {
     @Environment(\.modelContext) var modelContext
-    @State var selected: Tab = .list
+    @State var selected: TabItem = .list
     var basicColor: Color = .black
     var selectedColor: Color = .indigo
     
@@ -134,7 +127,7 @@ struct MainTabView: View {
 }
 
 #Preview(traits: .diarySample) {
-    MainTabView(selected: .list)
+    MainView(selected: .list)
 }
 
 // 탭 뷰 다른 방식

@@ -25,7 +25,7 @@ struct MindRepoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            MainView()
         }
         .modelContainer(sharedModelContainer)
     }
