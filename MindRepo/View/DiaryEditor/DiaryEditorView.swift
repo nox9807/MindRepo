@@ -191,7 +191,7 @@ struct DiaryEditorView: View {
     /// 이모지와 텍스트 뷰
     private func emojiTextView(_ mood: Mood, isSelected: Bool) -> some View {
         VStack(spacing: 3) {
-            Text(mood.emoji)
+            Text(mood.emojis)
                 .font(.largeTitle)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 8)
