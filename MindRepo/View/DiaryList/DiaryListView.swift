@@ -7,42 +7,7 @@
 import SwiftUI
 import SwiftData
 
-struct CustomYearMonthPickerView: View {
-    @Binding var year: Int
-    @Binding var month: Int
-    var onDone: () -> Void = {}
-    
-    let years = Array(2022...2035)
-    let months = Array(1...12)
-    
-    var body: some View {
-        VStack {
-            Text("선택하실 년도와 월을 고르세요.")
-                .font(.headline)
-            
-            HStack {
-                Picker("Year", selection: $year) {
-                    ForEach(years, id: \.self) {
-                        Text("\($0.formatted(.number.grouping(.never)))년").tag($0)
-                    }
-                }
-                .pickerStyle(.wheel)
-                
-                Picker("Month", selection: $month) {
-                    ForEach(months, id: \.self) {
-                        Text("\($0)월").tag($0)
-                    }
-                }
-                .pickerStyle(.wheel)
-            }
-            .frame(height: 170)
-            
-            Button("완료", action: onDone)
-                .buttonStyle(.borderedProminent)
-        }
-        .padding()
-    }
-}
+
 
 struct DiaryListView: View {
     
@@ -57,6 +22,8 @@ struct DiaryListView: View {
     @State var showPicker: Bool = false
     @State var keyword: String = ""
     
+    let action: () -> Void
+    
     var filterdItmes: [Diary] {
         if keyword.isEmpty {return items}
         else { return items.filter {
@@ -67,29 +34,9 @@ struct DiaryListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                // MARK: Title + 검색버튼
+                // MARK: 날짜 + 버튼
                 HStack() {
-                    Text("일기목록")
-                        .font(.title3)
-                        .bold()
-                    
-                    Spacer()
-                    Button {
-                        showSearch = true
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundStyle(.gray)
-                            .bold()
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.bottom)
-                
-                // MARK: 캘린더 구현
-                HStack {
-                    
-                    Spacer()
-                    
+                    // 날짜 Picker
                     Button {
                         showPicker = true
                     } label: {
@@ -102,13 +49,34 @@ struct DiaryListView: View {
                         .bold()
                     }
                     .sheet(isPresented: $showPicker) {
-                        CustomYearMonthPickerView(year: $year, month: $month) {
+                        CustomDatePicker(year: $year, month: $month) {
                             showPicker = false
                         }
                     }
                     .presentationDetents([.height(300)])
+                    .padding(.leading)
+                    Spacer()
+                    
+                    // 작성 버튼
+                    Button {
+                        action()
+                    } label: {
+                        Image(systemName: "plus")
+                            .foregroundStyle(.gray)
+                            .bold()
+                    }
+                    
+                    // 돋보기 버튼
+                    Button {
+                        showSearch = true
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(.gray)
+                            .bold()
+                    }
                 }
                 .padding(.horizontal)
+                .padding(.bottom)
                 
                 // MARK: ScrollView로 목록 구현
                 ScrollView(showsIndicators: false){
@@ -118,11 +86,12 @@ struct DiaryListView: View {
                 }
             }
             .background(.cyan.opacity(0.01))
+            .navigationTitle("일기목록")
         }
-        
+       
     }
 }
 
 #Preview(traits: .diarySample) {
-    DiaryListView()
+    DiaryListView(action: {})
 }
