@@ -14,7 +14,8 @@ struct DiaryView: View {
         ZStack(alignment: .topLeading) {
             RoundedRectangle(cornerRadius: 10)
                 .frame(minHeight: 100)
-                .foregroundStyle(.gray.opacity(0.1))
+                .foregroundStyle(Color.appCard)
+                .shadow(radius: 3, y: 3)
             
             VStack(alignment: .leading) {
                 HStack {
@@ -22,11 +23,12 @@ struct DiaryView: View {
                         .font(.title)
                     
                     VStack(alignment: .leading) {
-                        Text(diary.date, format: Date.FormatStyle(date: .numeric, time: .omitted))
-                            .bold()
                         Text(diary.date.formattedYMD_ko)
+                            .bold()
+                        Text(diary.date.formattedHM_ko)
                             .font(.footnote)
                     }
+                    .foregroundStyle(Color.textPrimary)
                 }
                 .frame(maxWidth: .infinity , alignment: .topLeading)
                 .padding(.top, 10)
@@ -34,6 +36,7 @@ struct DiaryView: View {
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(diary.content)
+                        .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
                 }
                 .padding(.vertical, 10)
@@ -42,7 +45,7 @@ struct DiaryView: View {
             .padding(.horizontal, 10)
         }
         .padding(.horizontal)
-        .foregroundStyle(.black)
+        //.background(Color.appBackground.opacity(0.95))
     }
 }
 

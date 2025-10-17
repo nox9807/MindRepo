@@ -21,22 +21,28 @@ struct MainView: View {
     }
     
     var body: some View {
-        // MARK: tabBar 아래 고정
-        tabBar
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .safeAreaInset(edge: .bottom) {
-                VStack() {
-                    Divider()
-                    
-                    tabButton
+            // MARK: tabBar 아래 고정
+            tabBar
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .safeAreaInset(edge: .bottom) {
+                    VStack() {
+                        Divider()
+                        
+                        tabButton
+                    }
+                    .background(.ultraThinMaterial)
+                    .overlay (
+                        Color.appNavWash.opacity(0.20)
+                            .blendMode(.overlay)
+                            .allowsHitTesting(false) // overlay를 하면 터치가 안되는걸 되게하는 모디파이어
+                    )
                 }
-                .background(.ultraThinMaterial)
-            }
-            .ignoresSafeArea(edges: .bottom)
-            .sheet(isPresented: $showSheet) {
-                DiaryEditorView()
-            }
+                .ignoresSafeArea(edges: .bottom)
+                .sheet(isPresented: $showSheet) {
+                    DiaryEditorView()
+                }
     }
+        
     // MARK: -tabBar 화면 전환
     @ViewBuilder
     var tabBar: some View {
@@ -49,6 +55,7 @@ struct MainView: View {
                 MoodStatisticsView()
         }
     }
+    
     // MARK: -tabButton 기능
     @ViewBuilder
     var tabButton: some View {
@@ -114,6 +121,7 @@ struct MainView: View {
         .padding(.bottom)
         
     }
+    
 }
 
 #Preview(traits: .diarySample) {

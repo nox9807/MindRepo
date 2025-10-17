@@ -25,10 +25,12 @@ struct DiaryListView: View {
     let action: () -> Void
     
     var filterdItmes: [Diary] {
-        if keyword.isEmpty {return items}
-        else { return items.filter {
+        if keyword.isEmpty {
+            return items
+        } else { return items.filter {
             return $0.content.lowercased().contains(keyword.lowercased())
-        }}
+        }
+        }
     }
     
     var body: some View {
@@ -42,19 +44,15 @@ struct DiaryListView: View {
                     } label: {
                         HStack {
                             Text("\(year.formatted(.number.grouping(.never)))년 \(month)월")
-                                .padding(.horizontal, -5)
+                                .foregroundStyle(Color.textPrimary)
+                            
                             Image(systemName: "chevron.down")
+                                .foregroundStyle(Color.appPrimary)
                         }
-                        .foregroundStyle(.gray)
                         .bold()
                     }
-                    .sheet(isPresented: $showPicker) {
-                        CustomDatePicker(year: $year, month: $month) {
-                            showPicker = false
-                        }
-                    }
-                    .presentationDetents([.height(300)])
-                    .padding(.leading)
+                    
+                    
                     Spacer()
                     
                     // 작성 버튼
@@ -62,7 +60,7 @@ struct DiaryListView: View {
                         action()
                     } label: {
                         Image(systemName: "plus")
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(Color.appPrimary)
                             .bold()
                     }
                     
@@ -71,7 +69,7 @@ struct DiaryListView: View {
                         showSearch = true
                     } label: {
                         Image(systemName: "magnifyingglass")
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(Color.appPrimary)
                             .bold()
                     }
                 }
@@ -85,10 +83,16 @@ struct DiaryListView: View {
                     }
                 }
             }
-            .background(.cyan.opacity(0.01))
+            // 백그라운 컬러
+            .background(Color.appBackground.opacity(0.95))
             .navigationTitle("일기목록")
         }
-       
+        .sheet(isPresented: $showPicker) {
+            CustomDatePicker(year: $year, month: $month) {
+                showPicker = false
+            }
+        }
+        .presentationDetents([.height(300)])
     }
 }
 
