@@ -14,6 +14,12 @@ struct MainView: View {
     var basicColor: Color = .black
     var selectedColor: Color = .indigo
     
+    @State var showSheet = false
+    
+    func showPlusSheet() {
+        showSheet = true
+    }
+    
     var body: some View {
         // MARK: tabBar 아래 고정
         tabBar
@@ -27,17 +33,18 @@ struct MainView: View {
                 .background(.ultraThinMaterial)
             }
             .ignoresSafeArea(edges: .bottom)
+            .sheet(isPresented: $showSheet) {
+                DiaryEditorView()
+            }
     }
     // MARK: -tabBar 화면 전환
     @ViewBuilder
     var tabBar: some View {
         switch selected {
             case .list:
-                DiaryListView()
+                DiaryListView(action: showPlusSheet)
             case .calendar:
                 CalendarView(modelContext: modelContext)
-            case .editor:
-                DiaryEditorView()
             case .stats:
                 MoodStatisticsView()
         }
@@ -46,7 +53,6 @@ struct MainView: View {
     @ViewBuilder
     var tabButton: some View {
         HStack {
-            
             Spacer()
             
             Button {
@@ -58,7 +64,7 @@ struct MainView: View {
                         .scaledToFit()
                         .frame(width: 25, height: 25)
                     
-                    Text("일기목록")
+                    Text("목록")
                         .font(.caption)
                 }
             }
@@ -76,30 +82,12 @@ struct MainView: View {
                         .scaledToFit()
                         .frame(width: 25, height: 25)
                     
-                    Text("기분달력")
+                    Text("달력")
                         .font(.caption)
                 }
             }
             .foregroundStyle(selected == .calendar ? selectedColor : basicColor)
             .bold(selected == .calendar)
-            
-            Spacer()
-            
-            Button {
-                selected = .editor
-            } label: {
-                VStack {
-                    Image(systemName: "pencil")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                    
-                    Text("일기작성")
-                        .font(.caption)
-                }
-            }
-            .foregroundStyle(selected == .editor ? selectedColor : basicColor)
-            .bold(selected == .editor)
             
             Spacer()
             
@@ -112,7 +100,7 @@ struct MainView: View {
                         .scaledToFit()
                         .frame(width: 25, height: 25)
                     
-                    Text("기분통계")
+                    Text("통계")
                         .font(.caption)
                 }
             }
@@ -120,36 +108,14 @@ struct MainView: View {
             .bold(selected == .stats)
             
             Spacer()
+            
         }
         .frame(maxHeight: 60)
         .padding(.bottom)
+        
     }
 }
 
 #Preview(traits: .diarySample) {
     MainView(selected: .list)
 }
-
-// 탭 뷰 다른 방식
-//        TabView {
-//            DiaryListView()
-//                .tabItem {
-//                    Image(systemName: "document.fill")
-//                    Text("일기목록")
-//                }
-//            Text("기분달력")
-//                .tabItem {
-//                    Image(systemName: "document.fill")
-//                    Text("기분달력")
-//                }
-//            Text("일기작성1")
-//                .tabItem {
-//                    Image(systemName: "document.fill")
-//                    Text("기분달력")
-//                }
-//            MoodStat()
-//                .tabItem {
-//                    Image(systemName: "document.fill")
-//                    Text("기분통계")
-//                }
-//        }

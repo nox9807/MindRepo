@@ -11,6 +11,5 @@ import SwiftUI
 enum TabItem {
     case list
     case calendar
-    case editor
     case stats
 }
