@@ -39,7 +39,7 @@ struct MainView: View {
             case .editor:
                 DiaryEditorView()
             case .stats:
-                MoodStatView()
+                MoodStatisticsView()
         }
     }
     // MARK: -tabButton 기능
