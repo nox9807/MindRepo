@@ -24,7 +24,6 @@ struct CommonLayoutView<Header: View, Content: View>: View {
             content()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding()
     }
 }
 
