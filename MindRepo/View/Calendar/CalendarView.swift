@@ -16,16 +16,23 @@ struct CalendarView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            MonthlyCalendarView(vm: vm)
-            
-            if let diary = vm.selectedDiary {
-                DiaryView(diary: diary)
-            } else {
-                emptyView
+        CommonLayoutView {
+            Text("기분 달력")
+                .font(.largeTitle)
+                .bold()
+                .padding(.horizontal)
+        } content: {
+            VStack(alignment: .leading) {
+                MonthlyCalendarView(vm: vm)
+                
+                if let diary = vm.selectedDiary {
+                    DiaryView(diary: diary)
+                } else {
+                    emptyView
+                }
+                
+                Spacer()
             }
-            
-            Spacer()
         }
     }
     
