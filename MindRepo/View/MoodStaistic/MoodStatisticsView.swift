@@ -35,65 +35,75 @@ struct MoodStatisticsView: View {
     
     var body: some View {
         NavigationStack{
-            Spacer()
-            VStack() {
-                HStack {
+            VStack {
+                // MARK: 타이틀 아래 공백
+                Spacer()
+                    .frame(height: 60)
+
+                // MARK: 감정별과 파이차트
+                VStack {
+                    
                     Text("감정별 (총 \(total)건)")
                         .font(.headline)
                         .foregroundColor(.secondary)
                     
-                }
-                // 감정별 카운트 리스트
-                LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), spacing: 16) {
-                    ForEach(moodCounts, id: \.0) { mood, count in
-                        VStack(spacing: 6) {
-                            Text(mood.emojis)
-                                .font(.title3)
-                            Text("\(count)")
-                                .font(.headline)
-                                .foregroundColor(count > 0 ? .primary : .gray)
-                        }
-                    }
-                }
-                .navigationTitle("기본통계")
-               
-                // 파이 차트
-                if total > 0 {
-                    Chart {
-                        ForEach(chartData, id: \.0) { mood, ratio in
-                            SectorMark(
-                                angle: .value("비율", ratio),
-                                innerRadius: .ratio(0.5),
-                                angularInset: 1.2
-                            )
-                            .foregroundStyle(mood.color.opacity(0.6))
-                            .cornerRadius(4)
-                            .annotation(position: .overlay) {
-                                VStack{
-                                    Text(mood.emojis)
-                                        .font(.title3)
-                                    
-                                    Text("\(Int(ratio * 100))%")
-                                        .font(.caption)
-                                        .foregroundColor(.white)
-                                        .bold()
-                                }
+                    
+                    // 감정별 카운트 리스트
+                    LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), spacing: 16) {
+                        ForEach(moodCounts, id: \.0) { mood, count in
+                            VStack(spacing: 6) {
+                                Text(mood.emojis)
+                                    .font(.title3)
+                                Text("\(count)")
+                                    .font(.headline)
+                                    .foregroundColor(count > 0 ? .primary : .gray)
                             }
                         }
                     }
-                    .frame(height: 200)
-                    .chartLegend(.hidden)
-                    .padding()
-                } else {
-                    Text("데이터가 없습니다.")
-                        .foregroundColor(.gray)
+                    
+                    
+                    // 파이 차트
+                    if total > 0 {
+                        Chart {
+                            ForEach(chartData, id: \.0) { mood, ratio in
+                                SectorMark(
+                                    angle: .value("비율", ratio),
+                                    innerRadius: .ratio(0.5),
+                                    angularInset: 1.2
+                                )
+                                .foregroundStyle(mood.color.opacity(0.6))
+                                .cornerRadius(4)
+                                .annotation(position: .overlay) {
+                                    VStack{
+                                        Text(mood.emojis)
+                                            .font(.title3)
+                                        
+                                        Text("\(Int(ratio * 100))%")
+                                            .font(.caption)
+                                            .foregroundColor(.white)
+                                            .bold()
+                                    }
+                                }
+                            }
+                        }
+                        .frame(height: 200)
+                        .chartLegend(.hidden)
+                        .padding()
+                    } else {
+                        Text("데이터가 없습니다.")
+                            .foregroundColor(.gray)
+                    }
                 }
-            }
-            Spacer()
                 .padding(.vertical)
                 .background(Color(.systemGray6))
                 .cornerRadius(20)
                 .padding()
+                .navigationTitle("기본통계")
+                
+                // MARK: 파이차트 아래 공백
+                Spacer()
+                
+            }
         }
     }
 }
