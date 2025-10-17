@@ -38,11 +38,11 @@ struct DiaryEditorView: View {
         }
     }
     
-    init(diary: Diary? = nil) {
+    init(diary: Diary? = nil, date: Date = .now) {
         self.diary = diary
         _content = State(initialValue: diary?.content ?? "")
         _selectedMood = State(initialValue: diary?.mood ?? .neutral)
-        _selectedDate = State(initialValue: diary?.date ?? .now)
+        _selectedDate = State(initialValue: diary?.date ?? date)
     }
     
     /// 일기 저장
