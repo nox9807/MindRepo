@@ -6,9 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		45E7583B2EA1C3C400E8F6BD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7583A2EA1C3C400E8F6BD /* ContentView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		45572BFC2E9DD865008460D6 /* MindRepo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindRepo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45572C172E9DDD2A008460D6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		45E7583A2EA1C3C400E8F6BD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,6 +38,7 @@
 		45572BF32E9DD865008460D6 = {
 			isa = PBXGroup;
 			children = (
+				45E7585A2EA1C70200E8F6BD /* Template */,
 				45572C172E9DDD2A008460D6 /* README.md */,
 				45572BFE2E9DD865008460D6 /* MindRepo */,
 				45572BFD2E9DD865008460D6 /* Products */,
@@ -45,6 +51,14 @@
 				45572BFC2E9DD865008460D6 /* MindRepo.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		45E7585A2EA1C70200E8F6BD /* Template */ = {
+			isa = PBXGroup;
+			children = (
+				45E7583A2EA1C3C400E8F6BD /* ContentView.swift */,
+			);
+			path = Template;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,6 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45E7583B2EA1C3C400E8F6BD /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
