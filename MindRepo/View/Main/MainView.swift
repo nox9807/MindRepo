@@ -28,6 +28,16 @@ struct MainView: View {
                     )
             }
             .ignoresSafeArea(edges: .bottom)
+            .sheet(item: manager.sheetItemBinding) { item in
+                switch item {
+                case .newDiaryToday:
+                    DiaryEditorView()
+                case .newDiaryAt(let date):
+                    DiaryEditorView(date: date)
+                case .editDiary(let diary):
+                    DiaryEditorView(diary: diary)
+                }
+            }
             .environment(manager)
     }
     
