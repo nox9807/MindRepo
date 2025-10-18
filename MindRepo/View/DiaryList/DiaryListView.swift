@@ -13,6 +13,7 @@ import SwiftData
 struct DiaryListView: View {
     @Query(sort: \Diary.date, order: .reverse) private var items: [Diary]
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @Environment(EditorSheetManager.self) private var manager
     
     @State var year = Calendar.current.component(.year, from: .now)
@@ -112,19 +113,16 @@ struct DiaryListView: View {
             // MARK: ScrollView로 목록 구현
             ScrollView(showsIndicators: false){
                 ForEach(filterdItmes) { item in
-                    // TODO: - 수정, 삭제 기능
                     DiaryView(diary: item)
                         .contextMenu {
-                            Button {
-                                /// 삭제 기능
+                            Button(role: .destructive) {
+                                modelContext.delete(item)
                             } label: {
-                                /// 삭제 아이콘
-                                Text("삭제")
+                                Image(systemName: "trash")
                             }
-
                         }
                         .onTapGesture {
-                            /// 수정 기능
+                            manager.presentEditDiary(item)
                         }
                 }
             }
