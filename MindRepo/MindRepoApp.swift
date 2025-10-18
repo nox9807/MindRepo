@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct MindRepoApp: App {
+    @AppStorage("didOnboard") private var didOnboard = false
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Diary.self,
@@ -25,7 +27,11 @@ struct MindRepoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView()
+            if didOnboard {
+                MainView()
+            } else {
+                OnboardingView()
+            }
         }
         .modelContainer(sharedModelContainer)
     }
