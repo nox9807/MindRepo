@@ -8,16 +8,19 @@ import SwiftUI
 import SwiftData
 
 
-// TODO: - HeaderView 적용
+// TODO: - HeaderView 적용 // Ok
 // TODO: - toolbar로 추가, 검색 버튼 위치
 struct DiaryListView: View {
+    
     @Query(sort: \Diary.date, order: .reverse) private var items: [Diary]
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
+    
     @State var year = Calendar.current.component(.year, from: .now)
     @State var month = Calendar.current.component(.month, from: .now)
     @State var selection = Date()
     
-    @State var showSearch: Bool = false
+    @State var showSearch: Bool = false // 추후 수정
     @State var showPicker: Bool = false
     @State var keyword: String = ""
     
@@ -38,20 +41,26 @@ struct DiaryListView: View {
             VStack {
                 // MARK: 날짜 + 버튼
                 HStack() {
-                    // 날짜 Picker
-                    Button {
-                        showPicker = true
-                    } label: {
-                        HStack {
-                            Text("\(year.formatted(.number.grouping(.never)))년 \(month)월")
-                                .foregroundStyle(Color.textPrimary)
-                            
-                            Image(systemName: "chevron.down")
-                                .foregroundStyle(Color.appPrimary)
+                    CommonLayoutView {
+                        Text("일기목록")
+                            .font(.largeTitle)
+                        
+                        // 날짜 Picker
+                        Button {
+                            showPicker = true
+                        } label: {
+                            HStack {
+                                Text("\(year.formatted(.number.grouping(.never)))년 \(month)월")
+                                    .foregroundStyle(Color.textPrimary)
+                                
+                                Image(systemName: "chevron.down")
+                                    .foregroundStyle(Color.appPrimary)
+                            }
+                            .bold()
                         }
-                        .bold()
+                    } content: {
+                        
                     }
-                    
                     
                     Spacer()
                     
@@ -66,7 +75,7 @@ struct DiaryListView: View {
                     
                     // 돋보기 버튼
                     Button {
-                        showSearch = true
+                        showSearch = true // 추후 수정
                     } label: {
                         Image(systemName: "magnifyingglass")
                             .foregroundStyle(Color.appPrimary)
@@ -82,11 +91,10 @@ struct DiaryListView: View {
                         // TODO: - 수정, 삭제 기능
                         DiaryView(diary: item)
                             .contextMenu {
-                                Button {
-                                    /// 삭제 기능
+                                Button(role: .destructive){
+                                    context.delete(item)
                                 } label: {
-                                    /// 삭제 아이콘
-                                    Text("삭제")
+                                   Label("삭제", systemImage: "trash")
                                 }
 
                             }
@@ -98,7 +106,6 @@ struct DiaryListView: View {
             }
             // 백그라운 컬러
             .background(Color.appBackground.opacity(0.95))
-            .navigationTitle("일기목록")
         }
         .sheet(isPresented: $showPicker) {
             CustomDatePicker(year: $year, month: $month) {
