@@ -137,6 +137,7 @@ struct DiaryEditorView: View {
             .padding()
             .navigationTitle(isEditing ? "일기 수정" : "일기 작성")
             .navigationBarTitleDisplayMode(.inline)
+            .background(Color.appBackground.opacity(0.95))
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("취소") {

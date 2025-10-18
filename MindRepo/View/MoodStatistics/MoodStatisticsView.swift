@@ -80,7 +80,7 @@ struct MoodStatisticsView: View {
                                         
                                         Text("\(Int(ratio * 100))%")
                                             .font(.caption)
-                                            .foregroundColor(.white)
+                                            .foregroundColor(Color.mytext)
                                             .bold()
                                     }
                                 }
@@ -95,7 +95,7 @@ struct MoodStatisticsView: View {
                     }
                 }
                 .padding(.vertical)
-                .background(Color(.systemGray6))
+                .background(Color.appGrayCard)
                 .cornerRadius(20)
                 .padding()
                 .navigationTitle("기본통계")
@@ -104,6 +104,7 @@ struct MoodStatisticsView: View {
                 Spacer()
                 
             }
+            .background(Color.appBackground.opacity(0.95))
         }
     }
 }

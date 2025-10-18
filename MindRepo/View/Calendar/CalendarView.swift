@@ -35,6 +35,7 @@ struct CalendarView: View {
                 Spacer()
             }
         }
+        .background(Color.appBackground.opacity(0.95))
     }
     
     private var emptyView: some View {
@@ -50,19 +51,19 @@ struct CalendarView: View {
                     .padding(.bottom, 5)
                 Text("기록 없음")
                     .foregroundStyle(.gray)
-                
-                Button {
-                    manager.presentNewDiary(on: vm.selectedDate)
-                } label: {
-                    Text("기록 추가")
-                        .bold()
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 8)
-                        .background {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundStyle(.blue.opacity(0.2))
-                        }
-                }
+                // 기록 추가 버튼 미구현
+//                Button {
+//                    manager.presentNewDiary(on: vm.selectedDate)
+//                } label: {
+//                    Text("기록 추가")
+//                        .bold()
+//                        .padding(.horizontal, 20)
+//                        .padding(.vertical, 8)
+//                        .background {
+//                            RoundedRectangle(cornerRadius: 10)
+//                                .foregroundStyle(.blue.opacity(0.2))
+//                        }
+//                }
             }
         }
         .padding()

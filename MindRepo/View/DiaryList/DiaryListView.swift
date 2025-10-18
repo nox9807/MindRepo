@@ -57,8 +57,8 @@ struct DiaryListView: View {
                 Text("일기목록")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
-                monthSelectionButton
-                    .padding(.leading)
+//                monthSelectionButton
+//                    .padding(.leading)
             }
             .padding(5)
         } content: {
@@ -84,28 +84,28 @@ struct DiaryListView: View {
                 }
             }
         }
-        .sheet(isPresented: $showPicker) {
-            CustomDatePicker(year: $year, month: $month) {
-                showPicker = false
-            }
-            .presentationDetents([.height(300)])
-        }
+//        .sheet(isPresented: $showPicker) {
+//            CustomDatePicker(year: $year, month: $month) {
+//                showPicker = false
+//            }
+//            .presentationDetents([.height(300)])
+//        }
     }
     
-    private var monthSelectionButton: some View {
-        Button {
-            showPicker = true
-        } label: {
-            HStack {
-                Text("\(year.formatted(.number.grouping(.never)))년 \(month)월")
-                    .foregroundStyle(Color.textPrimary)
-                
-                Image(systemName: "chevron.down")
-                    .foregroundStyle(Color.appPrimary)
-            }
-            .bold()
-        }
-    }
+//    private var monthSelectionButton: some View {
+//        Button {
+//            showPicker = true
+//        } label: {
+//            HStack {
+//                Text("\(year.formatted(.number.grouping(.never)))년 \(month)월")
+//                    .foregroundStyle(Color.textPrimary)
+//                
+//                Image(systemName: "chevron.down")
+//                    .foregroundStyle(Color.appPrimary)
+//            }
+//            .bold()
+//        }
+//    }
     
     private var diaryList: some View {
         VStack {
@@ -117,7 +117,7 @@ struct DiaryListView: View {
                             Button(role: .destructive) {
                                 modelContext.delete(item)
                             } label: {
-                                Image(systemName: "trash")
+                                Label("삭제", systemImage: "trash")
                             }
                         }
                         .onTapGesture {
