@@ -7,7 +7,5 @@
 ```
 - Extension
 - Model
-- ViewModel
 - View
-    - Component
 ```

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 // MARK: - Diary
 @Model
@@ -76,5 +77,50 @@ extension Diary {
         
         dummy.forEach { context.insert($0) }
         try? context.save()
+    }
+}
+
+extension Diary {
+    var color: Color {
+        switch mood {
+            case .angry: .red
+            case .sad: .black
+            case .laugh: .cyan
+            case .neutral: .orange
+            case .bad: .gray
+            case .good: . green
+        }
+    }
+}
+
+extension Mood {
+    var color: Color {
+        switch self {
+        case .angry: .red
+        case .sad: .black
+        case .laugh: .cyan
+        case .neutral: .orange
+        case .bad: .gray
+        case .good: . green
+        }
+    }
+}
+
+extension Mood {
+    var emojis: Image {
+        switch self {
+            case .angry:
+                Image("angry")
+            case .sad:
+                Image("sad")
+            case .laugh:
+                Image("laugh")
+            case .neutral:
+                Image("neutral")
+            case .bad:
+                Image("bad")
+            case .good:
+                Image("good")
+        }
     }
 }
