@@ -21,8 +21,6 @@ struct DiaryListView: View {
     @State var showPicker: Bool = false
     @State var keyword: String = ""
     
-    let action: () -> Void
-    
     var filterdItmes: [Diary] {
         if keyword.isEmpty {
             return items
@@ -57,7 +55,6 @@ struct DiaryListView: View {
                     
                     // 작성 버튼
                     Button {
-                        action()
                     } label: {
                         Image(systemName: "plus")
                             .foregroundStyle(Color.appPrimary)
@@ -110,5 +107,5 @@ struct DiaryListView: View {
 }
 
 #Preview(traits: .diarySample) {
-    DiaryListView(action: {})
+    DiaryListView()
 }

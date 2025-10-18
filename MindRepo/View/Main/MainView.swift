@@ -8,122 +8,81 @@
 
 import SwiftUI
 
-// TODO: - CommonLayoutView로 변경 고려
+// MARK: - MainView
+
 struct MainView: View {
     @Environment(\.modelContext) var modelContext
     @State var selected: TabItem = .list
     
-    // TODO: - 컬러 Asset 추가
-    var basicColor: Color = .black
-    var selectedColor: Color = .indigo
-    
-    @State var showSheet = false
-    
-    func showPlusSheet() {
-        showSheet = true
-    }
-    
     var body: some View {
-            // MARK: - tabBar 아래 고정
-            tabBar
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .safeAreaInset(edge: .bottom) {
-                    VStack() {
-                        Divider()
-                        
-                        tabButton
-                    }
+        tabView
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .safeAreaInset(edge: .bottom) {
+                tabbarView
                     .background(.ultraThinMaterial)
                     .overlay (
                         Color.appNavWash.opacity(0.20)
                             .blendMode(.overlay)
                             .allowsHitTesting(false) // overlay를 하면 터치가 안되는걸 되게하는 모디파이어
                     )
-                }
-                .ignoresSafeArea(edges: .bottom)
-                .sheet(isPresented: $showSheet) {
-                    DiaryEditorView()
-                }
+            }
+            .ignoresSafeArea(edges: .bottom)
     }
-        
-    // MARK: - tabBar 화면 전환
+    
     @ViewBuilder
-    var tabBar: some View {
+    private var tabView: some View {
         switch selected {
-            case .list:
-                DiaryListView(action: showPlusSheet)
-            case .calendar:
-                CalendarView(modelContext: modelContext)
-            case .stats:
-                MoodStatisticsView()
+        case .list:
+            DiaryListView()
+        case .calendar:
+            CalendarView(modelContext: modelContext)
+        case .stats:
+            MoodStatisticsView()
         }
     }
     
-    // MARK: - tabButton 기능
-    var tabButton: some View {
-        HStack {
-            Spacer()
+    private var tabbarView: some View {
+        VStack() {
+            Divider()
             
-            Button {
-                selected = .list
-            } label: {
-                VStack {
-                    Image(systemName: "document")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                    
-                    Text("목록")
-                        .font(.caption)
+            HStack {
+                Spacer()
+                ForEach(TabItem.allCases, id: \.self) { item in
+                    Spacer()
+                    TabBarButton(item: item, selected: $selected)
+                    Spacer()
                 }
+                Spacer()
             }
-            .foregroundStyle(selected == .list ? selectedColor : basicColor)
-            .bold(selected == .list)
-            
-            Spacer()
-            
-            Button {
-                selected = .calendar
-            } label: {
-                VStack {
-                    Image(systemName: "calendar")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                    
-                    Text("달력")
-                        .font(.caption)
-                }
-            }
-            .foregroundStyle(selected == .calendar ? selectedColor : basicColor)
-            .bold(selected == .calendar)
-            
-            Spacer()
-            
-            Button {
-                selected = .stats
-            } label: {
-                VStack {
-                    Image(systemName: "chart.pie")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                    
-                    Text("통계")
-                        .font(.caption)
-                }
-            }
-            .foregroundStyle(selected == .stats ? selectedColor : basicColor)
-            .bold(selected == .stats)
-            
-            Spacer()
-            
+            .frame(maxHeight: 60)
+            .padding(.bottom)
         }
-        .frame(maxHeight: 60)
-        .padding(.bottom)
-        
     }
+}
+
+// MARK: - TabBarButton
+
+fileprivate struct TabBarButton: View {
+    let item: TabItem
+    @Binding var selected: TabItem
     
+    var body: some View {
+        Button {
+            selected = item
+        } label: {
+            VStack {
+                Image(systemName: item.systemImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 25, height: 25)
+                
+                Text(item.title)
+                    .font(.caption)
+            }
+        }
+        .foregroundStyle(item == selected ? .primary : .secondary)
+        .bold(item == selected)
+    }
 }
 
 #Preview(traits: .diarySample) {
