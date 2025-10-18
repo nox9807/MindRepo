@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-// TODO: - 파일나누기, 이름 page->content
 struct OnboardingView: View {
     @State private var currentPage = 0
     let totalPages = 3

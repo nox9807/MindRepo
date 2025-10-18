@@ -8,8 +8,7 @@ import SwiftUI
 import SwiftData
 
 
-// TODO: - HeaderView 적용
-// TODO: - toolbar로 추가, 검색 버튼 위치
+// TODO: - 데이터 없음 표시
 struct DiaryListView: View {
     @Query(sort: \Diary.date, order: .reverse) private var items: [Diary]
     @Environment(\.dismiss) private var dismiss

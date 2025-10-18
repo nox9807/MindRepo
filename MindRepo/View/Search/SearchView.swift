@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 
+// TODO: - 데이터 없음 표시
 struct SearchView: View {
     @Query private var diaries: [Diary]
     @State private var searchText: String = ""
