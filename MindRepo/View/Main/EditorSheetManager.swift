@@ -15,6 +15,9 @@ import SwiftUI
 /// 자동으로 표시 상태를 연동하도록 설계되어 있음.
 @Observable
 final class EditorSheetManager {
+    static let shared = EditorSheetManager()
+    
+    private init() {}
     
     /// 시트의 종류를 나타내는 타입.
     ///
@@ -81,7 +84,7 @@ final class EditorSheetManager {
 
 
 #Preview {
-    @Previewable @State var manager = EditorSheetManager()
+    @Previewable @State var manager: EditorSheetManager = .shared
     
     VStack {
         VStack {
