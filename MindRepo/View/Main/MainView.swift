@@ -12,6 +12,7 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.modelContext) var modelContext
+    @State var manager: EditorSheetManager = .shared
     @State var selected: TabItem = .list
     
     var body: some View {
@@ -27,6 +28,7 @@ struct MainView: View {
                     )
             }
             .ignoresSafeArea(edges: .bottom)
+            .environment(manager)
     }
     
     @ViewBuilder
