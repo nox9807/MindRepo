@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct CalendarView: View {
+    @Environment(EditorSheetManager.self) private var manager
     @State private var vm: CalendarViewModel
     
     init(modelContext: ModelContext) {
@@ -51,7 +52,7 @@ struct CalendarView: View {
                     .foregroundStyle(.gray)
                 
                 Button {
-                    // TODO: - 날짜 바탕 추가
+                    manager.presentNewDiary(on: vm.selectedDate)
                 } label: {
                     Text("기록 추가")
                         .bold()
@@ -71,4 +72,5 @@ struct CalendarView: View {
 #Preview(traits: .diarySample) {
     @Previewable @Environment(\.modelContext) var context
     CalendarView(modelContext: context)
+        .environment(EditorSheetManager.shared)
 }
