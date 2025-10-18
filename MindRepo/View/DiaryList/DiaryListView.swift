@@ -13,6 +13,8 @@ import SwiftData
 struct DiaryListView: View {
     @Query(sort: \Diary.date, order: .reverse) private var items: [Diary]
     @Environment(\.dismiss) private var dismiss
+    @Environment(EditorSheetManager.self) private var manager
+    
     @State var year = Calendar.current.component(.year, from: .now)
     @State var month = Calendar.current.component(.month, from: .now)
     @State var selection = Date()
@@ -31,81 +33,106 @@ struct DiaryListView: View {
         }
     }
     
+    func toggleSearch() {
+        showSearch.toggle()
+    }
+    
     var body: some View {
         NavigationStack {
-            VStack {
-                // MARK: 날짜 + 버튼
-                HStack() {
-                    // 날짜 Picker
-                    Button {
-                        showPicker = true
-                    } label: {
-                        HStack {
-                            Text("\(year.formatted(.number.grouping(.never)))년 \(month)월")
-                                .foregroundStyle(Color.textPrimary)
-                            
-                            Image(systemName: "chevron.down")
-                                .foregroundStyle(Color.appPrimary)
-                        }
-                        .bold()
-                    }
-                    
-                    
-                    Spacer()
-                    
-                    // 작성 버튼
-                    Button {
-                    } label: {
-                        Image(systemName: "plus")
-                            .foregroundStyle(Color.appPrimary)
-                            .bold()
-                    }
-                    
-                    // 돋보기 버튼
-                    Button {
-                        showSearch = true
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundStyle(Color.appPrimary)
-                            .bold()
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.bottom)
-                
-                // MARK: ScrollView로 목록 구현
-                ScrollView(showsIndicators: false){
-                    ForEach(filterdItmes) { item in
-                        // TODO: - 수정, 삭제 기능
-                        DiaryView(diary: item)
-                            .contextMenu {
-                                Button {
-                                    /// 삭제 기능
-                                } label: {
-                                    /// 삭제 아이콘
-                                    Text("삭제")
-                                }
-
-                            }
-                            .onTapGesture {
-                                /// 수정 기능
-                            }
-                    }
+            Group {
+                if showSearch {
+                    SearchView(dismiss: toggleSearch)
+                } else {
+                    content
                 }
             }
-            // 백그라운 컬러
             .background(Color.appBackground.opacity(0.95))
-            .navigationTitle("일기목록")
+        }
+    }
+    
+    // MARK: - 기존 리스트 뷰
+    private var content: some View {
+        CommonLayoutView {
+            VStack {
+                Text("일기목록")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                monthSelectionButton
+                    .padding(.leading)
+            }
+            .padding(5)
+        } content: {
+            diaryList
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showSearch = true
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundStyle(Color.appPrimary)
+                        .bold()
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    manager.presentNewDiary()
+                } label: {
+                    Image(systemName: "plus")
+                        .foregroundStyle(Color.appPrimary)
+                        .bold()
+                }
+            }
         }
         .sheet(isPresented: $showPicker) {
             CustomDatePicker(year: $year, month: $month) {
                 showPicker = false
             }
+            .presentationDetents([.height(300)])
         }
-        .presentationDetents([.height(300)])
+    }
+    
+    private var monthSelectionButton: some View {
+        Button {
+            showPicker = true
+        } label: {
+            HStack {
+                Text("\(year.formatted(.number.grouping(.never)))년 \(month)월")
+                    .foregroundStyle(Color.textPrimary)
+                
+                Image(systemName: "chevron.down")
+                    .foregroundStyle(Color.appPrimary)
+            }
+            .bold()
+        }
+    }
+    
+    private var diaryList: some View {
+        VStack {
+            // MARK: ScrollView로 목록 구현
+            ScrollView(showsIndicators: false){
+                ForEach(filterdItmes) { item in
+                    // TODO: - 수정, 삭제 기능
+                    DiaryView(diary: item)
+                        .contextMenu {
+                            Button {
+                                /// 삭제 기능
+                            } label: {
+                                /// 삭제 아이콘
+                                Text("삭제")
+                            }
+
+                        }
+                        .onTapGesture {
+                            /// 수정 기능
+                        }
+                }
+            }
+        }
     }
 }
 
 #Preview(traits: .diarySample) {
     DiaryListView()
+        .environment(EditorSheetManager.shared)
 }
