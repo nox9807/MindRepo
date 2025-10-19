@@ -53,7 +53,7 @@ MindRepo는 사용자가 귀여운 이모티콘과 함께 일상을 기록하고
 
 | 🏠 홈 화면 | 🔎 검색 화면 | ➕ 추가 화면 |
 |---|---|---|
-| <img width="301" height="623" alt="image" src="https://github.com/user-attachments/assets/84dd2063-680c-429c-8014-bc944d4ee38f" alt="홈 화면"> | <img width="305" height="623" alt="image" src="https://github.com/user-attachments/assets/9c933b8e-261c-4511-9c17-f40c95fbb996" alt="검색 화면"> |<img width="297" height="621" alt="image" src="https://github.com/user-attachments/assets/f62a49ac-d407-4466-918f-fe7d18296fe8" alt="추가 화면"> |
+| <img width="301" height="623" alt="image" src="https://github.com/user-attachments/assets/84dd2063-680c-429c-8014-bc944d4ee38f" alt="홈 화면"> | <img width="305" height="623" alt="image" src="https://github.com/user-attachments/assets/9c933b8e-261c-4511-9c17-f40c95fbb996" alt="필터 화면"> |<img width="297" height="621" alt="image" src="https://github.com/user-attachments/assets/f62a49ac-d407-4466-918f-fe7d18296fe8" alt="추가 화면"> |
 
 | 📅 달력 화면 | 📊 통계 화면 |
 |---|---|
