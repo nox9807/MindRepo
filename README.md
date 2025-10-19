@@ -74,7 +74,7 @@ MindRepo는 사용자가 귀여운 이모티콘과 함께 일상을 기록하고
 
     <!-- 김찬영 -->
     <td align="center" width="140">
-      <a href="https://github.com/53ch0905">
+      <a href="https://github.com/cymoseskim">
         <img src="https://github.com/USERNAME2.png?size=160" width="110" style="border-radius:12px;" alt="김찬영" />
         <br/>
         <sub><b>김찬영</b></sub>
