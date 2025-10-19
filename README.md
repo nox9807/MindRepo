@@ -58,3 +58,24 @@ MindRepo는 사용자가 귀여운 이모티콘과 함께 일상을 기록하고
 | 📅 달력 화면 | 📊 통계 화면 |
 |---|---|
 | <img width="303" height="624" alt="image" src="https://github.com/user-attachments/assets/c3883606-03d9-4adf-bc44-b406dfc84af8" alt="달력 화면"> | <img width="307" height="627" alt="image" src="https://github.com/user-attachments/assets/a525bf13-d6df-4c07-b5f5-186e4165e2fb" alt="통계 화면"> |
+
+## 👥 기여자
+
+<table>
+  <tr>
+    <td align="center" width="140">
+      <a href="https://github.com/cymoseskim">
+        <img src="https://github.com/cymoseskim.png?size=160" width="110" style="border-radius:12px;" alt="김찬영" />
+        <br/>
+        <sub><b>김찬영</b></sub>
+      </a>
+    </td>
+
+   <td align="center" width="140">
+     <a href="https://github.com/chlwodud9807">
+        <img src="https://github.com/USERNAME1.png?size=160" width="110" style="border-radius:12px;" alt="최재영" />
+        <br/>
+        <sub><b>최재영</b></sub>
+      </a>
+    </td>
+</table>
