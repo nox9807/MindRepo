@@ -63,7 +63,6 @@ MindRepo는 사용자가 귀여운 이모티콘과 함께 일상을 기록하고
 
 <table>
   <tr>
-    <!-- 최재영 -->
     <td align="center" width="140">
       <a href="https://github.com/chlwodud9807">
         <img src="https://github.com/USERNAME1.png?size=160" width="110" style="border-radius:12px;" alt="최재영" />
@@ -74,7 +73,7 @@ MindRepo는 사용자가 귀여운 이모티콘과 함께 일상을 기록하고
 
     <!-- 김찬영 -->
     <td align="center" width="140">
-      <a href="https://github.com/cymoseskim">
+      <a href="https://github.com/53moses0905">
         <img src="https://github.com/USERNAME2.png?size=160" width="110" style="border-radius:12px;" alt="김찬영" />
         <br/>
         <sub><b>김찬영</b></sub>
