@@ -36,11 +36,9 @@
 │   │   │   ├ 📝 OnboardingContentView
 │   │   │   ├ 📝 OnboardingView
 ```
-📁 주요 뷰 화면
+## 주요 뷰 화면
+<" />
 
-🏠 홈 화면	🔍 검색 화면
-	
-📊 통계 화면	🏷️ 카테고리 화면
-	<img width="297" height="621" alt="image" src="https://github.com/user-attachments/assets/679ae8ab-aa9c-4580-9001-f528f5dd02d9" />
-
-
+| 홈 화면 | 검색 화면 | 
+|---|---|
+| <img width="305" height="623" alt="image" src="https://github.com/user-attachments/assets/a51d5f63-42bc-40cf-bfb6-0cd65c992c40" alt="홈 화면"> | <img src="./docs/images/search.png" width="320" alt="검색 화면"> |
